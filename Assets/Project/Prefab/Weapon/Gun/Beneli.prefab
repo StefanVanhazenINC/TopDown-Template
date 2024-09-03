@@ -121,6 +121,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3641770143278504625, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _hitLayer.m_Bits
+      value: 545
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641770143278504625, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: _visualProjectTile
       value: 
       objectReference: {fileID: 5994858003179749773, guid: da1d85eba24a8644cbd792e3f9d28392, type: 3}
@@ -219,6 +223,10 @@ PrefabInstance:
     - target: {fileID: 7161882950411685246, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787910058774561955, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _enableShake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7787910058774561955, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: _xSizeTarget

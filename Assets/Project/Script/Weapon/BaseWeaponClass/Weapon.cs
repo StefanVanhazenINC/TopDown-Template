@@ -12,7 +12,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private GameObject _armLeft;
     [SerializeField] private GameObject _armRight;
     [SerializeField] private Transform _body;
-    [SerializeField,Tooltip("Need to flip visual in rotation")] private bool _flipBody = true;
+
 
 
 

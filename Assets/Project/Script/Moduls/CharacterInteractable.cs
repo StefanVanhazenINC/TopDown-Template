@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TopDownController;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,7 +19,6 @@ public class CharacterInteractable : MonoBehaviour
     [Header("InteractableLayer")]
     [SerializeField] private LayerMask _interactabLayer;
 
-
     private bool _assistSearch = false;
     private Vector2 _mousePosition;
     private IInteractable _interactableObject;
@@ -36,13 +36,11 @@ public class CharacterInteractable : MonoBehaviour
     private void Awake()
     {
         _inputController = GetComponent<InputController>();
-    }
-    private void Start()
-    {
         _inputController.OnInteractionEvent.AddListener(Interact);
         _inputController.LookEvent.AddListener(SetMousePosition);
         _inputController.SwitchDeviceInput.AddListener(EnableAssistSearch);
     }
+  
     private void SetMousePosition(Vector2 mousePosition) 
     {
         _mousePosition = mousePosition;
@@ -127,7 +125,10 @@ public class CharacterInteractable : MonoBehaviour
 
     public void EnableAssistSearch(bool value) 
     {
+        
         _assistSearch = value;
+
+
     }
 
 }

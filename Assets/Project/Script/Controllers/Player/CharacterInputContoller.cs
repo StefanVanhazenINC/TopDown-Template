@@ -146,7 +146,6 @@ public class CharacterInputContoller : InputController
     
     public void ChangeDeviceInput(bool assist) 
     {
-      
         _isGamepad = assist;
         SwitchDeviceInput?.Invoke(_isGamepad);
     }

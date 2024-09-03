@@ -7,7 +7,7 @@ using UnityEngine;
 public class AiController : MonoBehaviour
 {
     [SerializeField] private NavMeshGoalToTarget _navMesh;
-    [SerializeField] private HealthSystem _enemyControll;
+    [SerializeField] private HealthSystem _health;
 
 
     [Header("Attack Setting")]
@@ -21,6 +21,7 @@ public class AiController : MonoBehaviour
     [SerializeField] private int _damageValue = 1;
     [SerializeField] private LayerMask _obstacleLayer;
     [SerializeField] private LayerMask _targetLayer;
+
     [SerializeField] private Transform _armPivot;
     [SerializeField] private Transform _handleWeaponPivot;
     [SerializeField] private Animator _animator;
@@ -28,12 +29,12 @@ public class AiController : MonoBehaviour
     private HealthSystem _target =null;
 
     private Collider2D[] _overlapCheck = new Collider2D[10];
-    public HealthSystem EnemyControll { get => _enemyControll;}
+    public HealthSystem Health { get => _health;}
 
     public void Spawn() 
     {
         //восстановка здоровья 
-        _enemyControll.InitialSetting();
+        _health.InitialSetting();
         // задавание цели 
         FacingDirection = 1;
     }
@@ -49,7 +50,15 @@ public class AiController : MonoBehaviour
         CheckFlip();
         Attack();
     }
-    private void RotationToTarget()//поворот до цели 
+    private Vector2 _originWorkSpace;
+    private Vector2 _destWorkSpace;
+    private Vector2 _directionWorkSpace;
+    private float _lastAttack=0;
+    private float _timerAttack = 0;
+    public int FacingDirection { get; private set; }
+    public HealthSystem Target { get => _target; set => _target = value; }
+
+    public void RotationToTarget()//поворот до цели 
     {
         if (_target)
         {
@@ -74,9 +83,7 @@ public class AiController : MonoBehaviour
       
         //поворачивать в сторону цели , если цели нет, то в сторону движения 
     }
-    private float _lastAttack=0;
-    private float _timerAttack = 0;
-    private void Attack() //атака, если прошел кулдавн на атаку 
+    public void Attack() //атака, если прошел кулдавн на атаку 
     {
         if (_target!=null) 
         {
@@ -102,14 +109,14 @@ public class AiController : MonoBehaviour
             }
         }
     }
-    private IEnumerator AttackCo() 
+    public IEnumerator AttackCo() 
     {
         //начало анимации 
         _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(_microDelayAttack);
         _target.TryTakeDamage(new DamageInfo(_damageValue, _armPivot.right, 0));
     }
-    private void SearchTarget()//поиск ближайшей цели  
+    public void SearchTarget()//поиск ближайшей цели  
     {
         //предыдущая цель либо мертва либо выключена 
         if (_target != null)
@@ -147,10 +154,6 @@ public class AiController : MonoBehaviour
             }
         }
     }
-
-    private Vector2 _originWorkSpace;
-    private Vector2 _destWorkSpace;
-    private Vector2 _directionWorkSpace;
     public bool CheckLine(Vector3 targetPosition)
     {
 
@@ -168,7 +171,6 @@ public class AiController : MonoBehaviour
         return true;
 
     }
-    public int FacingDirection { get; private set; }
     public void CheckIfShouldFlip(float targetX, float pivotX)
     {
         if (targetX > pivotX)

@@ -139,6 +139,7 @@ public class CharacterWeaponHolder : WeaponHolder
             _weaponList.Insert(_currentWeaponIndex,go);
            
             go.transform.localPosition = Vector3.zero;
+            go.transform.localEulerAngles= Vector3.zero;
             if (ammo.Item1 == -1 && ammo.Item2 == -1)
             {
                 go.SetupWeapon(this);

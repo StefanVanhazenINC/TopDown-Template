@@ -12,7 +12,6 @@ namespace TopDownController
         private InputController _controller;
         private float _speedRotation;
         public bool CanAimming { get; set; }
-        public int FacingDirection { get; private set; }
         
         public Vector2 AimPosition{ get; set; }
         public Vector2 MousePosition{ get; set; }
@@ -22,25 +21,12 @@ namespace TopDownController
         private void Awake()
         {
             CanAimming = true;
-            FacingDirection = 1;
             _controller = GetComponent<InputController>();
 
         }
         private void Start()
         {
             _controller.LookEvent.AddListener(Aim);
-        }
-        public void Aim(Vector2 target,Transform armPivot,float rotationSpeed) 
-        {
-            if (CanAimming)
-            {
-                Vector2 directioMouseLook =(Vector2)armPivot.position - target;
-                float angle = Mathf.Atan2(directioMouseLook.y, directioMouseLook.x) * Mathf.Rad2Deg;
-                angle+=180;
-                CheckIfShouldFlip(target.x, armPivot.position.x);
-                Quaternion lerpAngle = Quaternion.Lerp(armPivot.rotation, Quaternion.Euler(0, armPivot.rotation.y, angle), Time.deltaTime * rotationSpeed);
-                armPivot.localRotation = lerpAngle;
-            }
         }
         public void Aim(Vector2 target)
         {
@@ -60,20 +46,7 @@ namespace TopDownController
                 _armPivot.localRotation = lerpAngle;
             }
         }
-        public void CheckIfShouldFlip(float targetX,float pivotX) 
-        {
-            if (targetX > pivotX)
-            {
-                FacingDirection = 1;
-                _handleArmPivot.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            else
-            {
-                FacingDirection = -1;
-                _handleArmPivot.localRotation = Quaternion.Euler(180, 0, 0);
-
-            }
-        }
+    
         public void Update()
         {
           

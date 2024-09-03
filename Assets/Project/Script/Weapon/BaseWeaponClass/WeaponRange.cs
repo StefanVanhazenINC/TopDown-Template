@@ -19,6 +19,7 @@ public class WeaponRange : Weapon
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _force = 1;
     [SerializeField] private int _projectileInShoot = 1;
+    [SerializeField] private bool _shootAfterAnimation = false;
 
     [SerializeField] private bool _randomSpeed;
     [SerializeField] private float _speedProjectile = 10;
@@ -130,7 +131,6 @@ public class WeaponRange : Weapon
         }
         if (Time.time > _lastShootTime + _fireRate  && _isReadyShoot)
         {
-            _currentMagSize--;
             UseWeaponEvent?.Invoke();
             _weaponHolder.UseWeaponEvent?.Invoke();
 
@@ -139,24 +139,32 @@ public class WeaponRange : Weapon
             {
                 _isReadyShoot = false;
             }
-            for (int i = 0; i < _shootDir.Length; i++)
+            if (!_shootAfterAnimation)
             {
-                for (int j = 0; j < _projectileInShoot; j++)
-                {
-                    _shootEvent?.Invoke(_shootDir[i]);
-                    _workSpace = new Vector3(_shootDir[i].position.x, _shootDir[i].position.y, _shootDir[i].position.z);
-                    if (_bulletSpawner)
-                    {
-                        float t_speed = _randomSpeed ? Random.Range(_minSpeedProjectile, _maxSpeedProjectile) : _speedProjectile;
-                        float t_liteTime = _randomSpeed ? Random.Range(_minLifeTimeProjectile, _maxLifeTimeProjectile) : _lifeTimeProjectile;
-                        _bulletSpawner.SpawnBullet(_workSpace, _shootDir[i].rotation, _damage, _force, t_speed, t_liteTime);
-                    }
-                }
-                
+                _currentMagSize--;
+                SpawnBullet();
             }
 
         }
 
+    }
+    public void SpawnBullet() 
+    {
+        for (int i = 0; i < _shootDir.Length; i++)
+        {
+            for (int j = 0; j < _projectileInShoot; j++)
+            {
+                _shootEvent?.Invoke(_shootDir[i]);
+                _workSpace = new Vector3(_shootDir[i].position.x, _shootDir[i].position.y, _shootDir[i].position.z);
+                if (_bulletSpawner)
+                {
+                    float t_speed = _randomSpeed ? Random.Range(_minSpeedProjectile, _maxSpeedProjectile) : _speedProjectile;
+                    float t_liteTime = _randomSpeed ? Random.Range(_minLifeTimeProjectile, _maxLifeTimeProjectile) : _lifeTimeProjectile;
+                    _bulletSpawner.SpawnBullet(_workSpace, _shootDir[i].rotation, _damage, _force, t_speed, t_liteTime);
+                }
+            }
+
+        }
     }
     public override void CancelUseWeapon()
     {
@@ -275,7 +283,7 @@ public class WeaponRange : Weapon
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("_armLeft"));
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("_armRight"));
                         EditorGUILayout.PropertyField(serializedObject.FindProperty("_body"));
-                        EditorGUILayout.PropertyField(serializedObject.FindProperty("_flipBody"));
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty("_shootAfterAnimation"));
                         break;
                     case "Weapon Range Data - Projectile":
 

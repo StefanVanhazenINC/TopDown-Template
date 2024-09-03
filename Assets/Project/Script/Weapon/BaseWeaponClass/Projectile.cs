@@ -30,7 +30,10 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(_visual);
             }
-            _visual = Instantiate(visual,transform.position,transform.rotation, transform) ;
+            if (visual) 
+            {
+                _visual = Instantiate(visual, transform.position, transform.rotation, transform);
+            }
         }
     }
 

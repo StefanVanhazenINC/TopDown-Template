@@ -70,7 +70,7 @@ public class WeaponHolder : MonoBehaviour
             _weapon.CancelUseWeapon();
         }
 
-        CheckToFlip();
+        //CheckToFlip();
     }
     public virtual void SetupWeapon(Weapon weapon) 
     {

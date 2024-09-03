@@ -36,7 +36,7 @@ public class CharacterMouseTarget : MonoBehaviour
 
         _target.position = _workSpaceVec3;
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         MovePosition();
     }

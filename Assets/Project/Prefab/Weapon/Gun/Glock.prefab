@@ -157,6 +157,10 @@ PrefabInstance:
       value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7787910058774561955, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _enableSqueeze
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7787910058774561955, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: _squeezeObject
       value: 
       objectReference: {fileID: 8471708631587434323}

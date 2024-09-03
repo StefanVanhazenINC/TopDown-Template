@@ -113,7 +113,8 @@ public class KnockBack : MonoBehaviour
 
             if (_agent)
             {
-                _agent.MoveToOffset(_velocity);
+                //_agent.MoveToOffset(_velocity);
+                _agent.Agent.velocity = _velocity;
             }
             if (_character)
             {

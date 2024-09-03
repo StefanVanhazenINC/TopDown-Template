@@ -63,20 +63,6 @@ namespace TopDownController
             }
         }
         #endregion
-        public void CheckIfShouldFlip(int xInput)
-        {
-            if (xInput != 0 && xInput != FacingDirection)
-            {
-                Flip();
-            }
-        }
-        public void Flip()
-        {
-            FacingDirection *= -1;
-            for (int i = 0; i < _needRotation.Length; i++)
-            {
-                _needRotation[i].Rotate(0, 180, 0, 0);
-            }
-        }
+       
     }
 }

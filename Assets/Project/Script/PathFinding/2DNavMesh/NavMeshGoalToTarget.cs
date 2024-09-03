@@ -17,9 +17,15 @@ public class NavMeshGoalToTarget : MonoBehaviour
     private bool _isStopped;
     private bool _isFirstStopped;
 
+    private InputController _controller;
+
     public NavMeshAgent Agent { get => _agent;  }
 
-
+    private void Awake()
+    {
+        _controller = GetComponent<InputController>();
+        _controller.OnMoveEvent.AddListener(Move);
+    }
 
     private void Update()
     {
@@ -83,7 +89,6 @@ public class NavMeshGoalToTarget : MonoBehaviour
             }
         }
     }
-    
     private IEnumerator DelayAgentEnable()
     {
         _obstacle.enabled = false;

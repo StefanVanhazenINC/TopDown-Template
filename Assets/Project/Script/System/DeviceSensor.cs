@@ -17,7 +17,7 @@ public class DeviceSensor : MonoBehaviour
     [SerializeField] private TMP_Text _debug;
 
     private DeviceType _currentSystem;
-    public void Awake()
+    public void Start()
     {
         Application.targetFrameRate = 60;
         SystemDeterm();
@@ -27,6 +27,8 @@ public class DeviceSensor : MonoBehaviour
         {
             InputDeviceDeterm();
         };
+        _characterInputContoller.ChangeDeviceInput(_isGamepad || _currentSystem == DeviceType.Handheld);
+
     }
     public void SystemDeterm()
     {
@@ -69,8 +71,7 @@ public class DeviceSensor : MonoBehaviour
                 _mobileInput.SetActive(true);
             }
         }
-        _characterInputContoller.ChangeDeviceInput(_isGamepad || _currentSystem == DeviceType.Handheld);
-        _debug.text = _currentSystem + " " + _isGamepad;
+        _debug.text = _currentSystem + " " + (_isGamepad || _currentSystem == DeviceType.Handheld);
 
 
     }

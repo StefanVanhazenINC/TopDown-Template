@@ -28,7 +28,7 @@ public class WeaponHolderUi : MonoBehaviour
 
         int secondIndex = _weaponHodler.CurrentWeaponIndex == 1 ? 0 : 1;
         int firstIndex = _weaponHodler.CurrentWeaponIndex;
-        if (_weaponHodler.WeaponList.Count > 1)
+        if (_weaponHodler.WeaponList.Count > 0)
         {
             if (_weaponHodler.WeaponList[firstIndex] != null)
             {

@@ -164,6 +164,10 @@ PrefabInstance:
       value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _infinityMag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: _speedProjectile
       value: 0.1
       objectReference: {fileID: 0}
@@ -172,28 +176,76 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootAfterAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5362820210351474245}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 5362820210351474245}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GenerateImpulse
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: SetTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Cinemachine.CinemachineImpulseSource, Cinemachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: _shootEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+      propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Attack
       objectReference: {fileID: 0}
     - target: {fileID: 4560319510725438184, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       propertyPath: UseWeaponEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
@@ -207,9 +259,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieArm Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8063871868539286336, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+    - {fileID: 4673252354487291224, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1842947928021067015, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
+    - {fileID: 2039090774421855710, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 442314707353476990, guid: 7ccda594e1837fb44bd74d154f295054, type: 3}
       insertIndex: -1
