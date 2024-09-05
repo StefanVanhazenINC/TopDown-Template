@@ -27,7 +27,6 @@ public abstract class Weapon : MonoBehaviour
  
     public abstract bool WeaponReady{ get; }
     public virtual bool InfinityAmmo { get;  }
-    public bool FlipBody { get => _flipBody; set => _flipBody = value; }
     public bool IsReloading { get => _isReloading; set => _isReloading = value; }
     public Sprite Sprite { get => _iconWeapon; set => _iconWeapon = value; }
     public abstract Transform BaseShootDir { get; }

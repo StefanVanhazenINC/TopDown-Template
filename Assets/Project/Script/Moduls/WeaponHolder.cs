@@ -32,7 +32,6 @@ public class WeaponHolder : MonoBehaviour
     public UnityEvent<Weapon, Weapon> TakeWeaponEvent;
 
 
-    protected bool _flipVisual;
 
     private bool _isShoot;
 
@@ -76,7 +75,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (weapon) 
         {
-            _flipVisual = weapon.FlipBody;
+            
             weapon.SetupWeapon(this);
 
         }
@@ -94,25 +93,5 @@ public class WeaponHolder : MonoBehaviour
       
     }
 
-    public void CheckToFlip() 
-    {
-        if (_weapon) 
-        {
-            if (_flipVisual)
-            {
-                if (_rotationPivor.localRotation.eulerAngles.y > 0 && _rotationPivor.localRotation.eulerAngles.y < 180)
-                {
-                    if (_weapon)
-                        _weapon.Body.localRotation = Quaternion.Euler(180, 0, 0);
-                }
-                else
-                {
-                    if (_weapon)
-                        _weapon.Body.localRotation = Quaternion.Euler(0, 0, 0);
-                }
-            }
-        }
-        
-        
-    }
+   
 }
