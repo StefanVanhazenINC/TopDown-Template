@@ -4,52 +4,46 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class NavMeshGoalToTarget : MonoBehaviour
+namespace TopDown_Template
 {
-    [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private NavMeshObstacle _obstacle;
-    
-    [SerializeField] private float _moveThreshold;//минимальная сокрость после которой засчитывается остановка
-    [SerializeField] private float _timeToStationary;
-
-    private float _lastTimeStop;
-    private bool _isMoving;
-    private bool _isStopped;
-    private bool _isFirstStopped;
-
-    private InputController _controller;
-
-    public NavMeshAgent Agent { get => _agent;  }
-
-    private void Awake()
+    public class NavMeshGoalToTarget : MonoBehaviour
     {
-        _controller = GetComponent<InputController>();
-        _controller.OnMoveEvent.AddListener(Move);
-    }
+        #region Variable 
 
-    private void Update()
-    {
-        CheckStoppedAgent();
-    }
-    public void MoveToOffset(Vector2 offset)
-    {
-        if (_obstacle)
+        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private NavMeshObstacle _obstacle;
+
+        [SerializeField] private float _moveThreshold;//минимальная сокрость после которой засчитывается остановка
+        [SerializeField] private float _timeToStationary;
+
+        private float _lastTimeStop;
+        private bool _isMoving;
+        private bool _isStopped;
+        private bool _isFirstStopped;
+
+        private InputController _controller;
+        #endregion
+
+        #region Getter Setter
+        public NavMeshAgent Agent { get => _agent; }
+        #endregion
+
+        #region UnityCallback
+        private void Awake()
         {
-            StartCoroutine(DelayAgentEnable());
+            _controller = GetComponent<InputController>();
+            _controller.OnMoveEvent.AddListener(Move);
         }
-        _isStopped = false;
-        _isFirstStopped = false;
-        _isMoving = true;
-        if (_agent.enabled)
+
+        private void Update()
         {
-            _agent.Move(offset);
+            CheckStoppedAgent();
         }
-    }
-    
-    public void Move(Vector2 targetPosition) 
-    {
-        
-        if (Vector2.Distance(targetPosition, transform.position) >= _agent.stoppingDistance)
+        #endregion
+
+        #region NavMeshGoalToTarget Method
+
+        public void MoveToOffset(Vector2 offset)
         {
             if (_obstacle)
             {
@@ -60,39 +54,60 @@ public class NavMeshGoalToTarget : MonoBehaviour
             _isMoving = true;
             if (_agent.enabled)
             {
-                _agent.SetDestination(targetPosition);
+                _agent.Move(offset);
             }
         }
-       
-    }
-    private void CheckStoppedAgent() 
-    {
-        if (_agent.velocity.magnitude <= _moveThreshold && _isStopped == false)
+
+        public void Move(Vector2 targetPosition)
         {
-            if (!_isStopped)
+
+            if (Vector2.Distance(targetPosition, transform.position) >= _agent.stoppingDistance)
             {
-                if (_isMoving == true && _isFirstStopped == false)
+                if (_obstacle)
                 {
-                    _isFirstStopped = true;
-                    _lastTimeStop = Time.time;
+                    StartCoroutine(DelayAgentEnable());
                 }
-                if (Time.time >= _lastTimeStop + _timeToStationary)
+                _isStopped = false;
+                _isFirstStopped = false;
+                _isMoving = true;
+                if (_agent.enabled)
                 {
-                    if (_obstacle)
+                    _agent.SetDestination(targetPosition);
+                }
+            }
+
+        }
+        private void CheckStoppedAgent()
+        {
+            if (_agent.velocity.magnitude <= _moveThreshold && _isStopped == false)
+            {
+                if (!_isStopped)
+                {
+                    if (_isMoving == true && _isFirstStopped == false)
                     {
-                        _agent.enabled = false;
-                        _obstacle.enabled = true;
+                        _isFirstStopped = true;
+                        _lastTimeStop = Time.time;
                     }
-                    _isStopped = true;
-                    _isMoving = false;
+                    if (Time.time >= _lastTimeStop + _timeToStationary)
+                    {
+                        if (_obstacle)
+                        {
+                            _agent.enabled = false;
+                            _obstacle.enabled = true;
+                        }
+                        _isStopped = true;
+                        _isMoving = false;
+                    }
                 }
             }
         }
-    }
-    private IEnumerator DelayAgentEnable()
-    {
-        _obstacle.enabled = false;
-        yield return null;
-        _agent.enabled = true;
+        private IEnumerator DelayAgentEnable()
+        {
+            _obstacle.enabled = false;
+            yield return null;
+            _agent.enabled = true;
+        }
+        #endregion
+
     }
 }

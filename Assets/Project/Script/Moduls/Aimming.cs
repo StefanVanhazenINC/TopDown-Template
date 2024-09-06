@@ -5,19 +5,22 @@ namespace TopDownController
 {
     public class Aimming : MonoBehaviour
     {
+        #region Variable
         [SerializeField] private Transform _armPivot;
         [SerializeField] private Transform _handleArmPivot;
         [SerializeField] private float _rotationSpeed = 10;
 
         private InputController _controller;
         private float _speedRotation;
+        #endregion
+
+        #region Getter Setter
         public bool CanAimming { get; set; }
-        
         public Vector2 AimPosition{ get; set; }
         public Vector2 MousePosition{ get; set; }
+        #endregion
 
-
-
+        #region Unity Callback
         private void Awake()
         {
             CanAimming = true;
@@ -28,6 +31,18 @@ namespace TopDownController
         {
             _controller.LookEvent.AddListener(Aim);
         }
+        public void Update()
+        {
+          
+            if (CanAimming) 
+            {
+                ProccesAim(AimPosition, _speedRotation);
+            }
+        }
+
+        #endregion
+
+        #region UnityCallback
         public void Aim(Vector2 target)
         {
             MousePosition = target;
@@ -46,15 +61,7 @@ namespace TopDownController
                 _armPivot.localRotation = lerpAngle;
             }
         }
-    
-        public void Update()
-        {
-          
-            if (CanAimming) 
-            {
-                ProccesAim(AimPosition, _speedRotation);
-            }
-        }
-      
+        #endregion
+
     }
 }

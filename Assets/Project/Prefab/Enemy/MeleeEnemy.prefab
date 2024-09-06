@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 2725865092689245495}
   - component: {fileID: 570838224095745994}
   - component: {fileID: 2855192758192570342}
-  - component: {fileID: 4822382843563350901}
   - component: {fileID: 3690746337077774707}
   - component: {fileID: 2274137795632410481}
   - component: {fileID: 4930898780032997503}
@@ -309,19 +308,6 @@ MonoBehaviour:
           m_CallState: 2
   _isInvictable: 0
   _frameInvictable: 0
---- !u!114 &4822382843563350901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6018929224748271620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094c9667b926a7545a69a61277b8a3ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hitParticle: {fileID: 6461417326014315143, guid: 869d59ffdf0951d43a5031ff18d8aaa7, type: 3}
 --- !u!114 &3690746337077774707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,9 +320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fed2d35f103945b92a487816e438d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableFlash: 0
+  _enableSqueeze: 0
+  _enableShake: 0
+  _enableBlob: 0
   _durationFlash: 0.07
   _colorFlash: {r: 0.8509804, g: 0.17254902, b: 0.17254902, a: 0.8156863}
-  _squeezeObject: {fileID: 3646366787026870910}
   _xSizeTarget: 0
   _ySizeTarget: 0
   _durationSqueeze: 0

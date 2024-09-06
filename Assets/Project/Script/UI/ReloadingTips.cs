@@ -2,33 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class ReloadingTips : MonoBehaviour
+namespace TopDown_Template
 {
+    public class ReloadingTips : MonoBehaviour
+    {
+        #region Variable
+        [SerializeField] private CharacterWeaponHolder _weponHolder;
+        [SerializeField] private GameObject _reloadingTip;
+        #endregion
+        #region UnityCallback
+        public void Start()
+        {
+            Construct(_weponHolder);
+        }
+        #endregion
 
-    [SerializeField] private CharacterWeaponHolder _weponHolder;
-    [SerializeField] private GameObject _reloadingTip;
-    public void Start()
-    {
-        Construct(_weponHolder);
-    }
-    public void Construct(CharacterWeaponHolder weponHolder)
-    {
-        _weponHolder = weponHolder;
-        _weponHolder.UseWeaponEvent.AddListener(CheckReloading);
-        _weponHolder.ReloadingWeaponEvent.AddListener(CheckReloading);
-        _weponHolder.EndReloadingWeaponEvent.AddListener(CheckReloading);
-        _weponHolder.SwitchWeaponEvent.AddListener(CheckReloading);
-    }
-    private void CheckReloading() 
-    {
-        if (_weponHolder.CurrentWeapon.GetStockAndMagAmmo().Item2 <= 0 || _weponHolder.CurrentWeapon.IsReloading)
+        #region ReloadingTips Method
+        public void Construct(CharacterWeaponHolder weponHolder)
         {
-            _reloadingTip.SetActive(true);
+            _weponHolder = weponHolder;
+            _weponHolder.UseWeaponEvent.AddListener(CheckReloading);
+            _weponHolder.ReloadingWeaponEvent.AddListener(CheckReloading);
+            _weponHolder.EndReloadingWeaponEvent.AddListener(CheckReloading);
+            _weponHolder.SwitchWeaponEvent.AddListener(CheckReloading);
         }
-        else 
+        private void CheckReloading()
         {
-            _reloadingTip.SetActive(false);
+            if (_weponHolder.CurrentWeapon.GetStockAndMagAmmo().Item2 <= 0 || _weponHolder.CurrentWeapon.IsReloading)
+            {
+                _reloadingTip.SetActive(true);
+            }
+            else
+            {
+                _reloadingTip.SetActive(false);
+            }
         }
+        #endregion
     }
 }

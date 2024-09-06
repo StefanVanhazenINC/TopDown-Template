@@ -2,21 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public abstract class PickUpObject: MonoBehaviour
+
+namespace TopDown_Template
 {
-
-    public abstract bool PickUp(CharacterInteractable character);
-
-
-    public virtual void OnTriggerEnter2D(Collider2D collision)
+    [RequireComponent(typeof(BoxCollider2D))]
+    public abstract class PickUpObject : MonoBehaviour
     {
-        if (collision.TryGetComponent(out CharacterInteractable character))
+        #region PickUpObject Method
+        public abstract bool PickUp(CharacterInteractable character);
+        #endregion
+
+        #region Unity Callback
+        public virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (PickUp(character))
+            if (collision.TryGetComponent(out CharacterInteractable character))
             {
-                Destroy(gameObject);
+                if (PickUp(character))
+                {
+                    Destroy(gameObject);
+                }
             }
         }
+        #endregion
     }
 }

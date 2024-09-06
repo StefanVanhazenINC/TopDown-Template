@@ -2,41 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class InteractableTips : MonoBehaviour
+namespace TopDown_Template
 {
-    [SerializeField] private CharacterInteractable _characterInteractable;
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private RectTransform _parent;
-    [SerializeField] private RectTransform _tip;
-
-    private void Start()
+    public class InteractableTips : MonoBehaviour
     {
-        Construct(_characterInteractable);
-    }
-    private void Construct(CharacterInteractable characterInteractable) 
-    {
-        _characterInteractable = characterInteractable;
-        _characterInteractable.OnFindObject.AddListener(UpdatePositionTips);
-    }
-    public void UpdatePositionTips(bool notNull,Vector2 position) 
-    {
-        if (notNull)
+        #region Variable
+        [SerializeField] private CharacterInteractable _characterInteractable;
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private RectTransform _parent;
+        [SerializeField] private RectTransform _tip;
+        #endregion
+        #region UnityCallback
+        private void Start()
         {
-            if (!_tip.gameObject.activeSelf)
-            {
-                _tip.gameObject.SetActive(true);
-            }
-
-            
-            _tip.position = RectTransformUtility.WorldToScreenPoint(Camera.main, position);
+            Construct(_characterInteractable);
         }
-        else 
+        #endregion
+        #region  InteractableTips Method
+        private void Construct(CharacterInteractable characterInteractable)
         {
-            if (_tip.gameObject.activeSelf) 
+            _characterInteractable = characterInteractable;
+            _characterInteractable.OnFindObject.AddListener(UpdatePositionTips);
+        }
+        public void UpdatePositionTips(bool notNull, Vector2 position)
+        {
+            if (notNull)
             {
-                _tip.gameObject.SetActive(false);
+                if (!_tip.gameObject.activeSelf)
+                {
+                    _tip.gameObject.SetActive(true);
+                }
+
+
+                _tip.position = RectTransformUtility.WorldToScreenPoint(Camera.main, position);
+            }
+            else
+            {
+                if (_tip.gameObject.activeSelf)
+                {
+                    _tip.gameObject.SetActive(false);
+                }
             }
         }
+        #endregion
     }
 }

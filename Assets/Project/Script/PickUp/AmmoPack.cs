@@ -2,18 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPack : PickUpObject
+namespace TopDown_Template
 {
-    [SerializeField, Range(1, 4f)] private int _precentRestoreAmmo;
-    public override bool PickUp(CharacterInteractable character)
+    public class AmmoPack : PickUpObject
     {
-        if (character.WeaponHolder.RestoreAmmo(_precentRestoreAmmo))
+        #region Variable 
+        [SerializeField, Range(1, 4f)] private int _precentRestoreAmmo;
+        #endregion
+
+        #region PickUpObject override Method
+        public override bool PickUp(CharacterInteractable character)
         {
-            return true;
+            if (character.WeaponHolder.RestoreAmmo(_precentRestoreAmmo))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
-        {
-            return false;
-        }
+        #endregion
     }
 }

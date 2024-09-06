@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class WeaponSpread : MonoBehaviour
 {
+    #region Variable
     [SerializeField] private float _rangeSpread;
+    #endregion
 
+
+    #region WeapobSpread Method
     public void ChageSpread(Transform point)
     {
         point.localEulerAngles = new Vector3(0,0,0) ;
@@ -15,4 +19,5 @@ public class WeaponSpread : MonoBehaviour
         point.localEulerAngles = new Vector3(point.localEulerAngles.x, point.localEulerAngles.y, angleZ);
       
     }
+    #endregion
 }

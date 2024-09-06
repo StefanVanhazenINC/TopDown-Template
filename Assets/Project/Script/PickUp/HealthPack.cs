@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
-
-public class HealthPack : PickUpObject
+namespace TopDown_Template
 {
-    [SerializeField] private int _valueHeal;
-    public override bool PickUp(CharacterInteractable character) 
+    public class HealthPack : PickUpObject
     {
-        if (character.PlayerHealth.TryTakeHeal(_valueHeal))
+        #region Variable 
+        [SerializeField] private int _valueHeal;
+        #endregion
+        #region PickUpObject override Method
+
+        public override bool PickUp(CharacterInteractable character)
         {
-            return true;
+            if (character.PlayerHealth.TryTakeHeal(_valueHeal))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else 
-        {
-            return false;
-        }
+        #endregion
+
     }
-   
 }

@@ -4,19 +4,26 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
-public class AnimationEvents : MonoBehaviour
+namespace TopDown_Template
 {
-    [SerializeField] private UnityEvent[] _startAnimation;
-    [SerializeField] private UnityEvent[] _endAnimation;
-
-
-    public void StartAnimationEvent(int index) 
+    public class AnimationEvents : MonoBehaviour
     {
-        _startAnimation[index]?.Invoke();
+        #region Variable 
+        [SerializeField] private UnityEvent[] _startAnimation;
+        [SerializeField] private UnityEvent[] _endAnimation;
+        #endregion
+
+        #region AnimationEvents Method
+        public void StartAnimationEvent(int index)
+        {
+            _startAnimation[index]?.Invoke();
+        }
+        public void EndAnimationEvent(int index)
+        {
+            _endAnimation[index]?.Invoke();
+        }
+        #endregion
+
     }
-    public void EndAnimationEvent(int index) 
-    {
-        _endAnimation[index]?.Invoke();
-    }
+
 }

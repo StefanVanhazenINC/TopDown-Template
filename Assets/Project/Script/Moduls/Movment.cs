@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-namespace TopDownController
+namespace TopDown_Template
 {
     [RequireComponent (typeof(Rigidbody2D))]
     public class Movment : MonoBehaviour
     {
-        [SerializeField] private Transform[] _needRotation;
+        #region Variable 
+        private Vector2 _workSpace;
+        private InputController _controller;
+        #endregion
+
+        #region Getter Setter
+
         public Rigidbody2D RB { get; private set; }
         public Vector2 CurrentVelocity { get; private set; }
         public int FacingDirection { get; private set; }
         public bool CanSetVelocity { get; set; }
 
-        private Vector2 _workSpace;
+        #endregion
 
-        private InputController _controller;
-
+        #region Unity Callback
         private void Awake()
         {
             FacingDirection = 1;
@@ -32,6 +37,7 @@ namespace TopDownController
         {
             CurrentVelocity = RB.velocity;
         }
+        #endregion
 
         #region Set Function
         public void SetVelocityZero()
@@ -59,7 +65,6 @@ namespace TopDownController
             {
                 RB.velocity = _workSpace;
                 CurrentVelocity = _workSpace;
-                //CheckIfShouldFlip(Mathf.CeilToInt(CurrentVelocity.x));
             }
         }
         #endregion

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavMesh2DSetupAgent : MonoBehaviour
+namespace TopDown_Template
 {
-
-    void Start()
+    public class NavMesh2DSetupAgent : MonoBehaviour
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-    }
+        #region Unity Callback
+        void Start()
+        {
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
+        #endregion
 
-  
+
+    }
 }

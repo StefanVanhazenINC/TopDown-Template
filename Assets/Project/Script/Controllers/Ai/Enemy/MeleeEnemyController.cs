@@ -1,66 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using newAi;
+
 using UnityEngine.AI;
-
-public class MeleeEnemyController : newAi.AiController
+namespace TopDown_Template
 {
-    private NavMeshAgent _agent;
-    private Vector2 _lookDirection;
+    public class MeleeEnemyController : AiController
+    {
+        private NavMeshAgent _agent;
+        private Vector2 _lookDirection;
 
-    public override void Spawn()
-    {
-        base.Spawn();
-        _agent = GetComponent<NavMeshAgent>();
-        _lastAttack = -100;
-    }
-    private void Start()
-    {
-        Spawn();
-    }
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        if (_target)
+        public override void Spawn()
         {
-            OnMoveEvent?.Invoke(_target.transform.position);
-            _lookDirection = _target.transform.position;
+            base.Spawn();
+            _agent = GetComponent<NavMeshAgent>();
+            _lastAttack = -100;
         }
-        else 
+        private void Start()
         {
-            _lookDirection = _agent.desiredVelocity + transform.position;
+            Spawn();
         }
-        LookEvent?.Invoke(_lookDirection);
-        Attack();
-    }
-    public void Attack() 
-    {
-        if (_target != null)
+        protected override void FixedUpdate()
         {
-            if (Time.time >= _lastAttack + _attackDelay)
+            base.FixedUpdate();
+            if (_target)
             {
-                if (Vector2.Distance(_target.transform.position, transform.position) <= _radiusAttack)
+                OnMoveEvent?.Invoke(_target.transform.position);
+                _lookDirection = _target.transform.position;
+            }
+            else
+            {
+                _lookDirection = _agent.desiredVelocity + transform.position;
+            }
+            LookEvent?.Invoke(_lookDirection);
+            Attack();
+        }
+        public void Attack()
+        {
+            if (_target != null)
+            {
+                if (Time.time >= _lastAttack + _attackDelay)
                 {
-                    if (CheckAngle(_target.transform.position, _angleAttack))
+                    if (Vector2.Distance(_target.transform.position, transform.position) <= _radiusAttack)
                     {
-                        _timerAttack += Time.deltaTime;
-                        if (_timerAttack >= _durationEnemyInFront)
+                        if (CheckAngle(_target.transform.position, _angleAttack))
                         {
-                            _lastAttack = Time.time;
-                            _timerAttack = 0;
-                            OnAttackEvent?.Invoke(true);
-                            return;
+                            _timerAttack += Time.deltaTime;
+                            if (_timerAttack >= _durationEnemyInFront)
+                            {
+                                _lastAttack = Time.time;
+                                _timerAttack = 0;
+                                OnAttackEvent?.Invoke(true);
+                                return;
+                            }
                         }
-                    }
-                    else
-                    {
-                        _timerAttack = 0;
+                        else
+                        {
+                            _timerAttack = 0;
+                        }
                     }
                 }
             }
-        }
-        OnAttackEvent?.Invoke(false);
+            OnAttackEvent?.Invoke(false);
 
+        }
     }
 }

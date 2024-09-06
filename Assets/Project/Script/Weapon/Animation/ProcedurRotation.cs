@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ProcedurRotation : MonoBehaviour
 {
+    #region Variable
     [SerializeField] private AnimationCurve _curve;
     [SerializeField] private float _duration;
     [SerializeField] private float _offsetAngle;
@@ -14,9 +15,13 @@ public class ProcedurRotation : MonoBehaviour
     private bool _endRotation = true;
 
     public UnityAction _endAnimationEvent;
+    #endregion
 
+    #region Getter Setter
     public float Duration { get => _duration; set => _duration = value; }
+    #endregion
 
+    #region ProcedurRotation Method
     private void SwitchDirection()
     {
         _direction *= -1;
@@ -72,4 +77,6 @@ public class ProcedurRotation : MonoBehaviour
         _endRotation = true;
         _endAnimationEvent?.Invoke();
     }
+    #endregion
+
 }

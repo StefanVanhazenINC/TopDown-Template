@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace newAi {
+namespace TopDown_Template 
+{ 
     public class AiController : InputController
     {
+        #region Variable
 
         [SerializeField] protected HealthSystem _health;
         [SerializeField] protected Transform _armPivot;
@@ -34,18 +36,35 @@ namespace newAi {
         protected HealthSystem _target = null;
         protected Collider2D[] _overlapCheck = new Collider2D[10];
 
-        public virtual void Spawn()
-        {
-            _health.InitialSetting();
-        }
+        public delegate void OnDisableCallback(AiController instance);
+        public OnDisableCallback Disable;
+        #endregion
 
+        #region Untiy Callback
         protected virtual void FixedUpdate()
         {
             SearchTarget();
         }
-        public void SearchTarget()//поиск ближайшей цели  
+        private void OnDrawGizmosSelected()
         {
-            //предыдущая цель либо мертва либо выключена 
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, _radiusAttack);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _radiusSearch);
+        }
+        private void OnDisable()
+        {
+            Disable?.Invoke(this);
+        }
+        #endregion
+
+        #region  AiController Method
+        public virtual void Spawn()
+        {
+            _health.InitialSetting();
+        }
+        public void SearchTarget()
+        {
             if (_target != null)
             {
                 if (_target.IsDead || !_target.gameObject.activeSelf)
@@ -55,15 +74,12 @@ namespace newAi {
             }
             if (_target == null)
             {
-                //постоянный поиск цели , а  точнее списка 
                 _overlapCheck = Physics2D.OverlapCircleAll(transform.position, _radiusSearch, _targetLayer);
 
-                //проверка списка 
                 for (int i = 0; i < _overlapCheck.Length; i++)
                 {
                     if (_overlapCheck[i] != null)
                     {
-                        //проверять список на доступность и преграждения с помощью Raycast 
                         if (CheckLine(_overlapCheck[i].transform.position))
                         {
                             HealthSystem t_target = _overlapCheck[i].GetComponent<HealthSystem>();
@@ -113,20 +129,8 @@ namespace newAi {
             }
             return true;
         }
-        public delegate void OnDisableCallback(AiController instance);
-        public OnDisableCallback Disable;
-        private void OnDisable()
-        {
-            Disable?.Invoke(this);
-        }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, _radiusAttack);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, _radiusSearch);
-        }
+        #endregion 
 
     }
 }
