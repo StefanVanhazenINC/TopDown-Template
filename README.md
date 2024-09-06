@@ -19,3 +19,24 @@
 - Взаимодействия с объектами. Подбор оружия;
 - Подбираемые улучшения. Аптечка и патроны;
 - UI. Шкала здоровья, карточка оружия и прицел.
+  
+===============================================
+
+A ready-made list of mechanics to start implementing your own game with a top view in 2D
+
+Assets used:
+
+-Dotween;
+-2D NavMesh;
+-Cinemachine.
+
+Includes mechanics:
+
+- Character and enemy movement; 
+- The realization of a simple enemy; 
+- The health system; 
+- The weapon system; Adaptation of the control to the gamepad, touch control and keyboard \ mouse; 
+- Implementing simple effects with DOTween;
+- Interactions with objects. Selection of weapons; 
+- Selected improvements. First aid kit and ammunition; 
+- UI. Health scale, weapon card and sight.
