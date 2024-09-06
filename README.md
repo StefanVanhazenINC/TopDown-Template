@@ -6,6 +6,7 @@
 
 - Dotween
 - 2D NavMesh
+- Cinemachine
 
 Включет в себя механики:
 
